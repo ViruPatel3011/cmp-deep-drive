@@ -1,0 +1,7 @@
+  <label>{{ label() }}</label>
+
+  <!-- The problem is Angular does not care about which content might eventually end up in your components template
+   . It only cares about what is sees in your components template. 
+   Here it just sees a placeholder in ng-content, not actual text-area and input.  -->
+  <ng-content select="input, textarea" />
+

@@ -1,4 +1,15 @@
 <span>
   <ng-content />
 </span>
-<ng-content select=".icon" />
+<span class="icon">
+  <ng-content select="icon" />
+
+  <!-- Note: -->
+  <!-- Fallback content : used when ng content failed to find some content to render then it will show fallback content -->
+
+  <!-- <ng-content select="icon">
+    → -->
+  <!-- Fallback content(icon)-->
+  <!-- </ng-content> -->
+   
+</span>
