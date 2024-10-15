@@ -1,0 +1,11 @@
+<div class="dashboard-item">
+  <article>
+    <header>
+      <!-- Property binding is done using []  -->
+      <!-- image is a signal input function so need to access using () as method -->
+      <img [src]="image().src" [alt]="image().alt" />
+      <h2>{{ title() }}</h2>
+    </header>
+    <ng-content />
+  </article>
+</div>
