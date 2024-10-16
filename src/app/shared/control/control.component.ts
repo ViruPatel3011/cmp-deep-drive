@@ -1,4 +1,7 @@
 import {
+  AfterContentInit,
+  afterNextRender,
+  afterRender,
   Component,
   contentChild,
   ContentChild,
@@ -25,7 +28,7 @@ import {
     '(click)': 'onClick()', // Alternate approach of  @HostListener()
   },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   // This feature just exists for backward compatibility reasons: You should use host:{} instead of this approach
   // @HostBinding('class') className = 'control';
   // @HostListener('click') onClick() {
@@ -39,6 +42,21 @@ export class ControlComponent {
 
   private control =
     contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
+  constructor() {
+    // Anything change anywhere in any component in angular application, this will be logged in console
+    afterRender(() => {
+      console.log('After render');
+    });
+
+    // after the next change anywhere in the angular application
+    afterNextRender(() => {
+      console.log('After nextRender');
+    });
+  }
+
+  // For ngOnInit() we can't get value in both case: ContentChild and ViewChild. In function we can get value.
+  ngAfterContentInit() {}
 
   onClick() {
     console.log('Click');
