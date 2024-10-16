@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -7,11 +14,18 @@ import { Component } from '@angular/core';
   templateUrl: './server-status.component.html',
   styleUrl: './server-status.component.css',
 })
-export class ServerStatusComponent {
-  currentStatus: 'online' | 'offline' | 'unknown' = 'offline';
 
-  constructor() {
-    setInterval(() => {
+// You must use this implements for interface to protect your application againt unwanted typos
+export class ServerStatusComponent implements OnInit, AfterViewInit {
+  currentStatus: 'online' | 'offline' | 'unknown' = 'offline';
+  // Type of interval should be the type of value returned by setInterval
+  // private interval?: ReturnType<typeof setInterval>;
+
+  private destroyRef = inject(DestroyRef);
+  constructor() {}
+
+  ngOnInit() {
+    const interval = setInterval(() => {
       const random = Math.random();
 
       if (random < 0.5) {
@@ -22,5 +36,18 @@ export class ServerStatusComponent {
         this.currentStatus = 'unknown';
       }
     }, 5000);
+
+    this.destroyRef.onDestroy(() => {
+      clearInterval(interval);
+    });
   }
+
+  ngAfterViewInit() {
+    console.log('AFTER VIEW INIT');
+  }
+
+  // ngOnDestroy() {
+  //   console.log('NG-DESTROY');
+  //   clearTimeout(this.interval);
+  // }
 }
