@@ -3,5 +3,8 @@
   <!-- The problem is Angular does not care about which content might eventually end up in your components template
    . It only cares about what is sees in your components template. 
    Here it just sees a placeholder in ng-content, not actual text-area and input.  -->
+
+   <!-- Here ng-content works as placeholder , not an actual template code so we can't use ViewChild here -->
+    <!-- Note: ViewChild and ViewChildren only allow selecting elements in that template component   -->
   <ng-content select="input, textarea" />
 

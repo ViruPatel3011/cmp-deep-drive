@@ -1,13 +1,18 @@
-<form>
+<!-- Here titleInput and textInput are the element object so need to send only value from that -->
+<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form>
   <!-- If we want to use dynamic typescript expression for lable then should use [] but in this case it is not required -->
-
   <app-control label="Title">
-    <input name="title" id="title" />
+    <!-- # is only important while creating templates -->
+    <!-- template variable is alternative approach for ngModel  -->
+    <input name="title" id="title" #titleInput #input />
   </app-control>
-  <app-control label="Request"> 
-    <textarea name="request" id="request" rows="3"></textarea>
+  <app-control label="Request">
+    <textarea name="request" id="request" rows="3" #textInput #input></textarea>
   </app-control>
   <p>
-    <button appButton>Submit <span ngProjectAs="icon"> ⌲ </span></button>
+    <button appButton #btn>Submit <span ngProjectAs="icon"> ⌲ </span></button>
   </p>
 </form>
+
+<!-- Note: by default template variable gives access to dom elements , but if we are putting template variable on one of your components
+then you get access to component instance instead -->
