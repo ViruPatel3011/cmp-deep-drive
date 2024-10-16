@@ -1,8 +1,8 @@
 <div>
   <ul>
     @for(ticket of tickets; track ticket.id){
-        <!-- {{$count}}, {{$last}} -->
-    <li><app-ticket /> - {{ $first }}</li>  
+    <!-- {{$count}}, {{$last}},{{ $first }} -->
+    <li><app-ticket [data]="ticket" (close)="onCloseTicket(ticket.id)" /></li>
     } @empty{
     <p>No tickets available!!</p>
     }
